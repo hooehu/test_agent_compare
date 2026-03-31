@@ -1,0 +1,25 @@
+output_dir: output
+figma_scale: 2
+viewport:
+  width: 1440
+  height: 900
+
+pages:
+  - name: login-page
+    url: https://sable-boil-40643239.figma.site/        # реальный URL страницы
+    figma_file_key: ivrJ1uqrkMWbQnKFHdmulw        # из URL Figma
+    figma_node_id: "1:720"                  # из ссылки на фрейм node_id
+
+
+#Шаг 2 — найди `figma_file_key`**
+
+#Открой свой файл в Figma, смотри на URL:
+
+#https://www.figma.com/file/ВОТЭТОВОЗЬМИ/название-файла
+
+
+#Шаг 3 — найди `figma_node_id`**
+
+#В Figma кликни правой кнопкой на нужный фрейм → **Copy link**. Получишь ссылку вида:
+
+#https://www.figma.com/file/xxx/yyy?node-id=12-345
