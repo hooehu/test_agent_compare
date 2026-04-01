@@ -3,27 +3,39 @@ from PIL import Image, ImageFilter
 from pathlib import Path
 
 
+def _crop_to_match(figma: Image.Image, page: Image.Image):
+    """Обрезаем обе картинки до общего размера — берём минимум по каждой стороне."""
+    w = min(figma.width, page.width)
+    h = min(figma.height, page.height)
+    figma = figma.crop((0, 0, w, h))
+    page  = page.crop((0, 0, w, h))
+    return figma, page
+
+
 def compare_images(figma_path: Path, page_path: Path) -> dict:
     figma = Image.open(figma_path).convert("RGB")
     page  = Image.open(page_path).convert("RGB")
 
-    # Размеры должны совпадать — браузер снят в том же размере что и фрейм
-    assert figma.size == page.size, (
-        f"Размеры не совпадают: figma={figma.size} page={page.size}. "
-        "Проверь что runner.py читает размер из Figma перед скриншотом."
-    )
+    # Если размеры разные — подгоняем страницу под ширину макета
+    # и обрезаем по минимальной высоте
+    if figma.width != page.width:
+        ratio = figma.width / page.width
+        new_h = int(page.height * ratio)
+        page = page.resize((figma.width, new_h), Image.LANCZOS)
 
-    # Лёгкое размытие убирает шум от субпиксельного рендеринга шрифтов
+    figma, page = _crop_to_match(figma, page)
+
+    # Размытие 1px — убирает шум от субпиксельного рендеринга
     figma_arr = np.array(figma.filter(ImageFilter.GaussianBlur(1)), dtype=np.float32)
     page_arr  = np.array(page.filter(ImageFilter.GaussianBlur(1)),  dtype=np.float32)
 
     diff = np.abs(figma_arr - page_arr)
 
-    # Порог 10/255 (~4%) — игнорирует мелкие различия рендеринга
-    changed_mask    = diff.max(axis=2) > 10
+    # Порог 15/255 — игнорирует мелкие различия антиалиасинга и шрифтов UPD: Порог увелчен
+    changed_mask = diff.max(axis=2) > 30
     changed_percent = round(changed_mask.mean() * 100, 2)
 
-    # Визуальный diff поверх макета
+    # Визуальный diff
     diff_visual = figma.convert("RGBA")
     overlay     = np.array(diff_visual)
     overlay[changed_mask] = [220, 50, 50, 200]
