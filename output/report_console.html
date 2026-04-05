@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Отчёт: консоль — 2026-04-05 17:30</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; background: #f5f5f2; color: #2c2c2a; padding: 24px; }
+  h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .meta { color: #888; font-size: 13px; margin-bottom: 32px; margin-top: 4px; }
+  .card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid #e0ddd6; }
+  .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .name { font-size: 17px; font-weight: 500; }
+  .stat { font-size: 13px; color: #888; margin-left: auto; }
+  .badge { color: #fff; font-size: 12px; padding: 2px 10px; border-radius: 99px; white-space: nowrap; }
+  .url { font-size: 12px; color: #888; margin-bottom: 16px; margin-top: 2px; }
+  .url a { color: #185FA5; text-decoration: none; }
+  .url a:hover { text-decoration: underline; }
+  .analysis pre { background: #f5f5f2; border-radius: 8px; padding: 14px; font-size: 13px; white-space: pre-wrap; margin-bottom: 16px; }
+  .table-wrap { overflow-x: auto; }
+  .link-table { width: 100%; border-collapse: collapse; font-size: 12px; table-layout: fixed; }
+  .link-table th { text-align: left; padding: 6px 10px; background: #f5f5f2; color: #888; font-weight: 500; }
+  .link-table td { padding: 5px 10px; border-top: 1px solid #f0ede6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .link-table tr:hover td { background: #fafaf8; }
+  .col-status { width: 70px; font-weight: 500; }
+  .col-type   { width: 45px; color: #888; }
+  .col-url    { width: 55%; }
+  .col-text   { width: 25%; color: #888; }
+</style>
+</head>
+<body>
+<h1>Отчёт: консоль</h1>
+<p class="meta">Сгенерировано: 05.04.2026 17:30 · https://www.otpbank.ru/</p>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="name">Проверка консоли</span>
+        <span class="badge" style="background:#BA7517">Minor</span>
+        <span class="stat">ошибок: 0 · запросов упало: 0 · предупреждений: 2</span>
+      </div>
+      <p class="url"><a href="https://www.otpbank.ru/" target="_blank">https://www.otpbank.ru/</a></p>
+      <div class="analysis"><pre><br>Предупреждений: 2<br><br>  [warn] <link rel=preload> must have a valid `as` value<br>         в https://www.otpbank.ru/:80<br>  [warn] <link rel=preload> must have a valid `as` value<br>         в https://www.otpbank.ru/:81</pre></div>
+      
+      <div class="table-wrap">
+        <table class="link-table">
+          <thead>
+            <tr>
+              <th class="col-status">Тип</th>
+              <th class="col-url">Сообщение</th>
+              <th class="col-text">Расположение</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td class="col-status" style="color:#BA7517">warning</td>
+          <td class="col-url"><link rel=preload> must have a valid `as` value</td>
+          <td class="col-text">https://www.otpbank.ru/:80</td>
+        </tr>
+        <tr>
+          <td class="col-status" style="color:#BA7517">warning</td>
+          <td class="col-url"><link rel=preload> must have a valid `as` value</td>
+          <td class="col-text">https://www.otpbank.ru/:81</td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
+</body>
+</html>
